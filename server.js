@@ -6,6 +6,9 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static("public"));
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 
 // MongoDB connect
@@ -47,4 +50,8 @@ app.put("/update/:id", async (req, res) => {
   res.send("Note Updated");
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Server running");
+});
